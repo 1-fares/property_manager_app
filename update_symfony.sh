@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048 && \
 /sbin/mkswap /var/swap.1 && \
 /sbin/swapon /var/swap.1 && \
