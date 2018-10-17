@@ -1,0 +1,10 @@
+/* Copyright (c) 2018-2019, Fares Abdullah, all rights reserved. */
+
+.calendar-legend {
+	background-color: black;
+	color: white;
+	text-shadow: 0.07em 0 black, 0 0.07em black, -0.07em 0 black, 0 -0.07em black;
+	font-weight: bold;
+	list-style-type: none;
+	padding: 10px;
+}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		iframe {
+			width: 100%;
+			height: 1000px;
+		}
+	</style>
+{% endblock %}
+{% block body_nocontainer %}
+<div class="container">
+<div>
+	<input type="date">
+</div>
+<div>
+	<p>{{ message|raw }}</p>
+</div>
+</div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-xl">
+{% for subcalendar in subcalendars %}
+	<span class="badge badgex-pill calendar-legend" style="background-color: #{{ subcalendar.color }};">{{ subcalendar.name }}</span>
+{% endfor %}
+<iframe id="calendarframe" style="clip-path: inset(0 0 25px 0);" src="https://teamup.com/{{ teamupReadonlyKey }}?date=y1&view=y12m&tz=Europe/Rome&showHeader=0&disableSidepanel=1&showViewSelector=0&weekStartDay=su" frameborder="0"></iframe>
+{% for subcalendar in subcalendars %}
+	<span class="badge calendar-legend" style="background-color: #{{ subcalendar.color }};">{{ subcalendar.name }}</span>
+{% endfor %}
+</div> {# /col-xl #}
+</div> {# /row #}
+</div> {# /container-fluid #}
+{% endblock %}
+{% block javascripts %}
+<script>
+
+//alert("1");
+//console.log("This is something to be logged");
+/*var cssLink = document.createElement("link");
+cssLink.href = "style.css"; 
+cssLink.rel = "stylesheet"; 
+cssLink.type = "text/css"; 
+frames['calendarframe'].document.head.appendChild(cssLink);
+alert("2");
+*/
+</script>
+{% endblock %}

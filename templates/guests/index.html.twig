@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guests{% endblock %}
+
+{% block body %}
+<a href="{{ path('new_guest') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Add New Guest</a>
+<hr>
+{% if guests %}
+{% for guest in guests %}
+<div class="row mb-3">
+ <div class="card">
+  <h5 class="card-header">{{ guest.name }}</h5>
+  <div class="card-body">
+   <div class="row">
+    <div class="col-sm-9">
+     <dl class="row">
+         <dt class="col-sm-3">Email</dt>
+         <dd class="col-sm-9"><a href="mailto:{{guest.email}}">{{guest.email}}</a></dd>
+         <dt class="col-sm-3">Phone</dt>
+         <dd class="col-sm-9">{{guest.phone}}</dd>
+         <dt class="col-sm-3">Address</dt>
+         <dd class="col-sm-9">{{guest.address}}</dd>
+         <dt class="col-sm-3">Notes</dt>
+         <dd class="col-sm-9">{{guest.notes}}</dd>
+     </dl> {# /dl row #}
+    </div> {# /col-sm-9 #}
+    <div class="col-sm-3">
+     <a href="#" class="btn btn-success btn-sm btn-block mb-5"><i class="fas fa-umbrella-beach"></i> Make Booking</a>
+     <a href="/guests/edit/{{guest.id}}" class="btn btn-primary btn-block btn-sm"><i class="fas fa-edit"></i> Edit Guest</a>
+     <button id="TODO" class="btn btn-danger btn-block btn-sm"><i class="fas fa-trash-alt"></i> Delete Guest</button>
+    </div> {# /col-sm-3 #}
+   </div> {# /row #}
+  </div> {# card-body #}
+ </div> {# card #}
+</div> {# /row #}
+{% endfor %}
+{% else %}
+<div class="alert alert-light" role="alert">No guests saved yet.</div>
+{% endif %}
+{% endblock %}
