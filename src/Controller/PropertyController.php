@@ -22,7 +22,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use App\Teamup\Colors as TeamupColors;
 use App\Entity\Guest;
 
-class GiglioController extends AbstractController {
+class PropertyController extends AbstractController {
 
     /**
      * @Route("/", name="index")
@@ -110,7 +110,7 @@ class GiglioController extends AbstractController {
 		//$message .= "<pre>" . $result->getBody() . "</pre>";
 	}
  */
-        return $this->render('giglio/index.html.twig', [
+        return $this->render('home/index.html.twig', [
 //            'message' => $message,
             'message' => "",
 	    'teamupReadonlyKey' => 'ks7wvzdu9izk4er27n',
