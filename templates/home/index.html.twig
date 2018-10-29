@@ -11,8 +11,19 @@
 {% endblock %}
 {% block body_nocontainer %}
 <div class="container">
-<div>
-	<input type="date">
+<div class="card card-body bg-light">
+	<h4>Bookings</h4>
+	<a href="/bookings" class="btn btn-primary btn-lg btn-block" role="button">Manage Bookings</a>
+	<a href="/bookings/new" class="btn btn-primary btn-lg btn-block" role="button">New Booking</a>
+</div>
+<div class="card card-body bg-light mt-2">
+	<h4>Guests</h4>
+	<a href="/guests" class="btn btn-primary btn-lg btn-block" role="button">Manage Guests</a>
+	<a href="/guests/new" class="btn btn-primary btn-lg btn-block" role="button">New Guest</a>
+</div>
+<div class="card card-body bg-light mt-2">
+	<h4>Gaps</h4>
+	<a href="/gaps" class="btn btn-primary btn-lg btn-block" role="button">Show Gaps</a>
 </div>
 <div>
 	<p>{{ message|raw }}</p>

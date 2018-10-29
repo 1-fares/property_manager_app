@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bookings{% endblock %}
+
+{% block body %}
+<a href="{{ path('new_booking') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Make New Booking</a>
+<hr>
+{% if bookings %}
+{% for booking in bookings %}
+<div class="row mb-3">
+ <div class="card">
+  <h5 class="card-header">{{ booking.start_date }} - {{ booking.end_date }}</h5>
+  <div class="card-body">
+   <div class="row">
+    <div class="col-sm-9">
+     <dl class="row">
+         <dt class="col-sm-3">Guest</dt>
+         <dd class="col-sm-9"><a href="mailto:{{booking.guest_id}}">{{booking.guest_id}}</a></dd>
+         <dt class="col-sm-3">Start Date</dt>
+         <dd class="col-sm-9">{{booking.start_date}}</dd>
+         <dt class="col-sm-3">End Date</dt>
+         <dd class="col-sm-9">{{booking.end_date}}</dd>
+         <dt class="col-sm-3">Notes</dt>
+         <dd class="col-sm-9">{{booking.notes}}</dd>
+     </dl> {# /dl row #}
+    </div> {# /col-sm-9 #}
+    <div class="col-sm-3">
+     <a href="#" class="btn btn-success btn-sm btn-block mb-5"><i class="fas fa-umbrella-beach"></i> Make Booking</a>
+     <a href="/bookings/edit/{{booking.id}}" class="btn btn-primary btn-block btn-sm"><i class="fas fa-edit"></i> Edit Booking</a>
+     <button id="TODO" class="btn btn-danger btn-block btn-sm"><i class="fas fa-trash-alt"></i> Delete Booking</button>
+    </div> {# /col-sm-3 #}
+   </div> {# /row #}
+  </div> {# card-body #}
+ </div> {# card #}
+</div> {# /row #}
+{% endfor %}
+{% else %}
+<div class="alert alert-light" role="alert">No bookings made yet.</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Booking: {{booking.id}}{% endblock %}
+{% block body %}
+	<h2><span class="fas fa-user-edit"></span> Edit Booking:</h2>
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<a href="/bookings" class="btn btn-sm btn-secondary mt-1">Cancel</a>
+	{{ form_end(form) }}
+{% endblock %}

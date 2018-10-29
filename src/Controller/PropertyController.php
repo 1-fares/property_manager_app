@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 use Doctrine\ORM\Query\ResultSetMapping;
@@ -21,6 +22,7 @@ use GuzzleHttp\Client as GuzzleClient;
 
 use App\Teamup\Colors as TeamupColors;
 use App\Entity\Guest;
+use App\Entity\Booking;
 
 class PropertyController extends AbstractController {
 
@@ -158,7 +160,6 @@ class PropertyController extends AbstractController {
 		return $this->redirectToRoute('guests');
 	}
 
-
 	return $this->render('guests/new.html.twig', [
 		'form' => $form->createView(),
 	]);
@@ -190,10 +191,39 @@ class PropertyController extends AbstractController {
 		return $this->redirectToRoute('guests');
 	}
 
-
 	return $this->render('guests/edit.html.twig', [
 		'form' => $form->createView(),
 		'guest' => $guest,
 	]);
     }
-}
+
+	/**
+	* @Route("/bookings/new", name="new_booking", methods={"GET", "POST"})
+	*/
+	public function new_booking(Request $request) {
+		$booking = new Booking();
+
+		$formbuilder = $this->createFormBuilder($booking);
+		$formbuilder->add('guest_id', TextType::class, array('attr' => array('class' => 'form-control')));
+		$formbuilder->add('start_date', DateType::class, array('required' => false, 'attr' => array('class' => 'form-control')));
+		$formbuilder->add('end_date', DateType::class, array('attr' => array('class' => 'form-control')));
+		$formbuilder->add('notes', TextareaType::class, array('attr' => array('class' => 'form-control')));
+		$formbuilder->add('save', SubmitType::class, array('label' => 'Create', 'attr' => array('class' => 'btn btn-primary mt-3')));
+		$form = $formbuilder->getForm();
+
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			$booking = $form->getData();
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($booking);
+			$entityManager->flush();
+
+			return $this->redirectToRoute('bookings');
+		}
+
+		return $this->render('bookings/new.html.twig', [
+			'form' => $form->createView(),
+			]);
+		}
+	}
